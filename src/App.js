@@ -14,6 +14,8 @@ function App() {
   const [peopleList, setpeopleList] = useState(getLocalStorage());
   //state for people who have birthday today
   const [personBirthToday, setPersonBirthToday] = useState([]);
+  //state for single person
+  const [person, setPerson] = useState({ firstName: '', lastName: '', date: '', month: 'Январь', year: '' })
   //get current date
   const today = new Date();
   const todayYear = today.getFullYear();
@@ -27,6 +29,35 @@ function App() {
     } else {
       return `${name.slice(0, name.length - 1)}а`
     }
+  }
+  //handle person when we add him to the list
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+  //handle input changes, watch and control inputs in form
+  const handleChange = (e) => {
+    e.preventDefault();
+    const target = e.currentTarget;
+    console.log(target.name);
+    switch (target.name) {
+      case `firstName`:
+        setPerson({ ...person, firstName: target.value });
+        break;
+      case 'lastName':
+        setPerson({ ...person, lastName: target.value });
+        break;
+      case 'date':
+        setPerson({ ...person, date: target.value });
+        break;
+      case 'month':
+        setPerson({ ...person, month: target.value });
+        break;
+      case 'year':
+        setPerson({ ...person, year: target.value });
+        break;
+    }
+
+    console.log(person);
   }
   return (
     <main>
@@ -74,20 +105,47 @@ function App() {
         <form className="form" action="">
           <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>
           <div className="form-control">
-            <label htmlFor="name">Имя:</label>
-            <input id="name" name="name" type="text" />
+            <label htmlFor="firstName">Имя:</label>
+            <input
+              onChange={handleChange}
+              required
+              id="firstName"
+              name="firstName"
+              type="text"
+              value={person.firstName}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="lastName">Фамилия:</label>
-            <input id="lastName" name="lastName" type="text" />
+            <input
+              onChange={handleChange}
+              required id="lastName"
+              name="lastName"
+              type="text"
+              value={person.lastName}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="date">Дата:</label>
-            <input id="date" name="date" type="number" min="1" max="31" />
+            <input
+              onChange={handleChange}
+              required id="date"
+              name="date"
+              type="number"
+              min="1"
+              max="31"
+              value={person.date}
+            />
           </div>
           <div className="form-control">
             <label htmlfor="month">Месяц:</label>
-            <select id="month" name="month">
+            <select
+              onChange={handleChange}
+              required
+              id="month"
+              name="month"
+              value={person.month}
+            >
               <option selected>Январь</option>
               <option>Февраль</option>
               <option>Март</option>
@@ -104,9 +162,16 @@ function App() {
           </div>
           <div className="form-control">
             <label htmlFor="year">Год:</label>
-            <input id="year" name="year" type="number" min="0" />
+            <input
+              onChange={handleChange}
+              required id="year"
+              name="year"
+              type="number"
+              min="0"
+              value={person.year}
+            />
           </div>
-          <button className="submit-btn" type="submit"> Добавить </button>
+          <button onClick={handleSubmit} className="submit-btn" type="submit"> Добавить </button>
         </form>
       </section>
     </main>
