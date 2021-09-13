@@ -20,7 +20,14 @@ function App() {
   const todayDate = today.getDate();
   //get full month name with this method
   const todayMonth = today.toLocaleString('default', { month: 'long' });;
-  console.log(todayYear, todayDate, todayMonth);
+  //function to transform month name
+  const transformMonthName = (name) => {
+    if (name.endsWith('ь') || name.endsWith('й')) {
+      return `${name.slice(0, name.length - 1)}я`;
+    } else {
+      return `${name.slice(0, name.length - 1)}а`
+    }
+  }
   return (
     <main>
       <section className="section">
@@ -30,9 +37,9 @@ function App() {
         </div>
         <h2 className="birthdays-title">Дни Рождения Сегодня!</h2>
         <div className="date-container">
-          <span className="date">13</span>
-          <span className="month">Сентябрь</span>
-          <span className="year">2021</span>
+          <span className="date">{todayDate}</span>
+          <span className="month">{transformMonthName(todayMonth)}</span>
+          <span className="year">{todayYear}</span>
         </div>
         <section className="birthdays-section">
           <article className="birthday">
@@ -79,7 +86,7 @@ function App() {
             <input id="date" name="date" type="number" min="1" max="31" />
           </div>
           <div className="form-control">
-            <label for="month">Месяц:</label>
+            <label htmlfor="month">Месяц:</label>
             <select id="month" name="month">
               <option selected>Январь</option>
               <option>Февраль</option>
