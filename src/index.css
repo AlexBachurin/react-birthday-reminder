@@ -122,6 +122,17 @@ main {
     line-height: 1;
   }
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 /*  global classes */
 
 /* section */
@@ -134,6 +145,7 @@ main {
 @media screen and (min-width: 992px) {
   .section {
     width: 95vw;
+    padding-bottom: 50px;
   }
 }
 
@@ -149,6 +161,7 @@ main {
 }
 .birthdays-section {
   margin-top: 40px;
+  margin-bottom: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 20px;
@@ -159,7 +172,7 @@ main {
 }
 .date-container {
   margin: 0 auto;
-  width: 13vw;
+  max-width: 270px;
   text-align: center;
   margin-top: 20px;
   font-size: 1.5rem;
@@ -192,4 +205,47 @@ main {
   height: 100px;
   object-fit: cover;
   border-radius: 50px;
+}
+
+.form {
+  margin-top: 30px;
+  max-width: 350px;
+  margin: 0 auto;
+  display: grid;
+  row-gap: 20px;
+  border: 1px solid #666;
+  padding: 20px;
+  background-color: var(--clr-grey-10);
+}
+.form-control {
+  display: grid;
+  grid-template-columns: 127px 173px;
+  grid-template-rows: auto;
+  row-gap: 20px;
+}
+.form-control select {
+  /* margin-right: 89px; */
+}
+.form-title {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
+}
+
+.submit-btn {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #102a42;
+  box-shadow: 0px 13px 13px 0px rgba(102, 64, 158, 0.28);
+  outline: none;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.5s;
+}
+.submit-btn:hover {
+  background-color: #8895a1;
 }
