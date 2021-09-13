@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Persons from './components/Persons';
 
 //get data from local storage
 const getLocalStorage = () => {
@@ -110,45 +111,7 @@ function App() {
         </div>
         <section className="birthdays-section">
           {/* display people with birthday */}
-          {personsBirthToday.map((person, index) => {
-            return (
-              <article key={index} className="birthday">
-                <div className="img-container">
-                  <img src="https://briefly.ru/static/cache/authors/480/gogol.jpeg?1622718658" alt="gogol" />
-                </div>
-                <h4>{person.firstName} {person.lastName}</h4>
-                <p>Сегодня {person.firstName} празднует свое {todayYear - person.year} летие! </p>
-              </article>
-            )
-          })}
-          {/* <article className="birthday">
-            <div className="img-container">
-              <img src="https://briefly.ru/static/cache/authors/480/gogol.jpeg?1622718658" alt="gogol" />
-            </div>
-            <h4>John wick</h4>
-            <p>21 dec 1992</p>
-          </article>
-          <article className="birthday">
-            <div className="img-container">
-              <img src="https://briefly.ru/static/cache/authors/480/gogol.jpeg?1622718658" alt="gogol" />
-            </div>
-            <h4>John doe</h4>
-            <p>21 dec 1995</p>
-          </article>
-          <article className="birthday">
-            <div className="img-container">
-              <img src="https://briefly.ru/static/cache/authors/480/gogol.jpeg?1622718658" alt="gogol" />
-            </div>
-            <h4>Sally Smith</h4>
-            <p>30 sep 1982</p>
-          </article>
-          <article className="birthday">
-            <div className="img-container">
-              <img src="https://briefly.ru/static/cache/authors/480/gogol.jpeg?1622718658" alt="gogol" />
-            </div>
-            <h4>Sally Smith</h4>
-            <p>30 sep 1982</p>
-          </article> */}
+          <Persons personsBirthToday={personsBirthToday} todayYear={todayYear} />
         </section>
         <form className="form" action="">
           <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>
