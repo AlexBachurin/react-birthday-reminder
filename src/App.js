@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 //get data from local storage
 const getLocalStorage = () => {
-  let list = localStorage.getItem('list');
+  let list = localStorage.getItem('birthdaysList');
   if (list) {
-    return (list = JSON.parse(localStorage.getItem('list')));
+    return (list = JSON.parse(localStorage.getItem('birthdaysList')));
   } else {
     return [];
   }
@@ -33,12 +33,27 @@ function App() {
   //handle person when we add him to the list
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (person.date < 0 || person.date > 31) {
+      //placeholder for error handling
+      console.log('wrong date')
+    }
+    else if (person.firstName && person.lastName && person.date && person.month && person.year) {
+      //if all values is allright set new person to our list
+      setpeopleList([...peopleList, person]);
+      //reset person
+      setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '' });
+
+    } else {
+      //placeholder for error handling
+      console.log('error')
+    }
+
   }
   //handle input changes, watch and control inputs in form
   const handleChange = (e) => {
     e.preventDefault();
     const target = e.currentTarget;
-    console.log(target.name);
+
     switch (target.name) {
       case `firstName`:
         setPerson({ ...person, firstName: target.value });
@@ -57,8 +72,14 @@ function App() {
         break;
     }
 
-    console.log(person);
   }
+
+  //change local storage value everytime we change our people list
+  useEffect(() => {
+    localStorage.setItem('birthdaysList', JSON.stringify(peopleList));
+  }, [peopleList])
+
+
   return (
     <main>
       <section className="section">
@@ -138,7 +159,7 @@ function App() {
             />
           </div>
           <div className="form-control">
-            <label htmlfor="month">Месяц:</label>
+            <label htmlFor="month">Месяц:</label>
             <select
               onChange={handleChange}
               required
@@ -146,7 +167,7 @@ function App() {
               name="month"
               value={person.month}
             >
-              <option selected>Январь</option>
+              <option defaultValue={person.month}>Январь</option>
               <option>Февраль</option>
               <option>Март</option>
               <option>Апрель</option>
