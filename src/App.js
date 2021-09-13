@@ -13,7 +13,7 @@ function App() {
   //set our people list with data from local storage
   const [peopleList, setpeopleList] = useState(getLocalStorage());
   //state for people who have birthday today
-  const [personBirthToday, setPersonBirthToday] = useState([]);
+  const [personsBirthToday, setPersonsBirthToday] = useState([]);
   //state for single person
   const [person, setPerson] = useState({ firstName: '', lastName: '', date: '', month: 'Январь', year: '' })
   //get current date
@@ -21,7 +21,7 @@ function App() {
   const todayYear = today.getFullYear();
   const todayDate = today.getDate();
   //get full month name with this method
-  const todayMonth = today.toLocaleString('default', { month: 'long' });;
+  const todayMonth = today.toLocaleString('default', { month: 'long' });
   //function to transform month name
   const transformMonthName = (name) => {
     if (name.endsWith('ь') || name.endsWith('й')) {
@@ -73,9 +73,24 @@ function App() {
     }
 
   }
+  //functionality to check if person in our list birthday is today
+  const checkBirthday = () => {
+    const peopleWithBirthToday = peopleList.filter((person) => {
+      //dont forget about types and cases
+      return Number(person.date) === todayDate && person.month.toLowerCase() === todayMonth.toLowerCase();
+    })
+    console.log(peopleWithBirthToday)
+    setPersonsBirthToday(peopleWithBirthToday);
+  }
+  //check birthday on every page load
+  useEffect(() => {
+    checkBirthday();
+  }, [])
 
   //change local storage value everytime we change our people list
   useEffect(() => {
+    //also check people with birthdays on every add to our list
+    checkBirthday();
     localStorage.setItem('birthdaysList', JSON.stringify(peopleList));
   }, [peopleList])
 
@@ -94,7 +109,19 @@ function App() {
           <span className="year">{todayYear}</span>
         </div>
         <section className="birthdays-section">
-          <article className="birthday">
+          {/* display people with birthday */}
+          {personsBirthToday.map((person, index) => {
+            return (
+              <article key={index} className="birthday">
+                <div className="img-container">
+                  <img src="https://briefly.ru/static/cache/authors/480/gogol.jpeg?1622718658" alt="gogol" />
+                </div>
+                <h4>{person.firstName} {person.lastName}</h4>
+                <p>Сегодня {person.firstName} празднует свое {todayYear - person.year} летие! </p>
+              </article>
+            )
+          })}
+          {/* <article className="birthday">
             <div className="img-container">
               <img src="https://briefly.ru/static/cache/authors/480/gogol.jpeg?1622718658" alt="gogol" />
             </div>
@@ -121,7 +148,7 @@ function App() {
             </div>
             <h4>Sally Smith</h4>
             <p>30 sep 1982</p>
-          </article>
+          </article> */}
         </section>
         <form className="form" action="">
           <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>
