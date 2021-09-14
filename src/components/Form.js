@@ -1,7 +1,7 @@
 import React from 'react'
 import Alert from './Alert'
 
-const Form = ({ person, handleSubmit, handleChange, alert }) => {
+const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
     return (
         <form className="form" action="">
             <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>
@@ -77,10 +77,12 @@ const Form = ({ person, handleSubmit, handleChange, alert }) => {
                 <label htmlFor="image">Фото url: <span>(необязательно)</span></label>
                 <input
                     onChange={handleChange}
-                    required id="image"
+                    required
+                    id="image"
                     name="image"
-                    type="text"
-                    value={person.img}
+                    accept="image/*"
+                    type="file"
+                    ref={fileInputRef}
                 />
             </div>
             <button onClick={handleSubmit} className="submit-btn" type="submit"> Добавить </button>

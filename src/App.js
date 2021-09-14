@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Form from './components/Form';
 import Persons from './components/Persons';
 
@@ -12,6 +12,8 @@ const getLocalStorage = () => {
   }
 }
 function App() {
+  //ref for file input to clear value
+  const fileInputRef = useRef(null)
   //set our people list with data from local storage
   const [peopleList, setpeopleList] = useState(getLocalStorage());
   //state for people who have birthday today
@@ -21,7 +23,7 @@ function App() {
   //state for alert
   const [alert, setAlert] = useState({ state: false, type: '' })
 
-
+  console.log(fileInputRef)
   //get current date
   const today = new Date();
   const todayYear = today.getFullYear();
@@ -50,6 +52,8 @@ function App() {
       setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' });
       //show success alert
       setAlert({ state: true, type: 'success' })
+      //clear value of file input
+      fileInputRef.current.value = null;
 
     } else {
       //set alert for missing fields error
@@ -79,10 +83,25 @@ function App() {
         setPerson({ ...person, year: target.value });
         break;
       case 'image':
-        setPerson({ ...person, img: target.value });
-    }
+        //get our file
+        const file = e.target.files[0];
+        const reader = new FileReader();
 
+
+        reader.onload = function (event) {
+          // The file's url will be printed here
+          const valueUrl = event.target.result;
+          setPerson({ ...person, img: valueUrl })
+        };
+        //read file as url
+        reader.readAsDataURL(file);
+        break;
+      default: {
+
+      }
+    }
   }
+
   //functionality to check if person in our list birthday is today
   const checkBirthday = () => {
     const peopleWithBirthToday = peopleList.filter((person) => {
@@ -136,7 +155,7 @@ function App() {
 
         </section>
         {/* FORM */}
-        <Form alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
+        <Form fileInputRef={fileInputRef} alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
       </section>
     </main>
   );
