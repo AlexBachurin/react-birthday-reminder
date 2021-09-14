@@ -98,9 +98,12 @@ function App() {
   }, [peopleList])
 
 
+  //if theres no persons to display return no users
+
   return (
     <main>
       <section className="section">
+        <img src="https://res.cloudinary.com/dljezd6qv/image/upload/v1619821176/main-logo-white-small.png" alt="logo" />
         <div className="header">
           <h1 className="title">Birthday reminder app</h1>
           <div className="underline"></div>
@@ -113,7 +116,8 @@ function App() {
         </div>
         <section className="birthdays-section">
           {/* display people with birthday */}
-          <Persons personsBirthToday={personsBirthToday} todayYear={todayYear} />
+          {personsBirthToday.length !== 0 ? <Persons personsBirthToday={personsBirthToday} todayYear={todayYear} /> : <h3 className="birthdays-none">There is no birthdays today</h3>}
+
         </section>
         {/* FORM */}
         <Form person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
