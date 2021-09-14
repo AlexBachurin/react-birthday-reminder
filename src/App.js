@@ -22,8 +22,6 @@ function App() {
   const [person, setPerson] = useState({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' })
   //state for alert
   const [alert, setAlert] = useState({ state: false, type: '' })
-
-  console.log(fileInputRef)
   //get current date
   const today = new Date();
   const todayYear = today.getFullYear();

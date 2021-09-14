@@ -74,16 +74,23 @@ const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
                 />
             </div>
             <div className="form-control">
-                <label htmlFor="image">Фото url: <span>(необязательно)</span></label>
-                <input
-                    onChange={handleChange}
-                    required
-                    id="image"
-                    name="image"
-                    accept="image/*"
-                    type="file"
-                    ref={fileInputRef}
-                />
+                <label htmlFor="image">Фото: <span>(необязательно)</span></label>
+                <div>
+                    <input
+                        onChange={handleChange}
+                        required
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        type="file"
+                        title="choose"
+                        ref={fileInputRef}
+                    />
+                    {/* show preview only if src is provided */}
+                    {person.img && <img src={person.img} alt="person" className="photo-preview" />}
+                </div>
+
+
             </div>
             <button onClick={handleSubmit} className="submit-btn" type="submit"> Добавить </button>
         </form>
