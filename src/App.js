@@ -16,7 +16,7 @@ function App() {
   //state for people who have birthday today
   const [personsBirthToday, setPersonsBirthToday] = useState([]);
   //state for single person
-  const [person, setPerson] = useState({ firstName: '', lastName: '', date: '', month: 'Январь', year: '' })
+  const [person, setPerson] = useState({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' })
   //get current date
   const today = new Date();
   const todayYear = today.getFullYear();
@@ -42,7 +42,7 @@ function App() {
       //if all values is allright set new person to our list
       setpeopleList([...peopleList, person]);
       //reset person
-      setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '' });
+      setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' });
 
     } else {
       //placeholder for error handling
@@ -71,6 +71,8 @@ function App() {
       case 'year':
         setPerson({ ...person, year: target.value });
         break;
+      case 'image':
+        setPerson({ ...person, img: target.value });
     }
 
   }
@@ -80,7 +82,6 @@ function App() {
       //dont forget about types and cases
       return Number(person.date) === todayDate && person.month.toLowerCase() === todayMonth.toLowerCase();
     })
-    console.log(peopleWithBirthToday)
     setPersonsBirthToday(peopleWithBirthToday);
   }
   //check birthday on every page load
@@ -180,6 +181,16 @@ function App() {
               type="number"
               min="0"
               value={person.year}
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="image">Фото url:</label>
+            <input
+              onChange={handleChange}
+              required id="image"
+              name="image"
+              type="text"
+              value={person.img}
             />
           </div>
           <button onClick={handleSubmit} className="submit-btn" type="submit"> Добавить </button>
