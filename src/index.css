@@ -189,8 +189,7 @@ input[type="number"] {
   text-transform: uppercase;
   font-weight: bold;
 }
-.date {
-}
+
 .year {
   font-size: 1.7rem;
 }
@@ -242,9 +241,6 @@ input[type="number"] {
   background-color: var(--clr-grey-10);
 }
 
-.form-control select {
-  /* margin-right: 89px; */
-}
 .form-title {
   text-align: center;
   font-size: 1.5rem;
@@ -274,6 +270,17 @@ input[type="number"] {
   grid-template-columns: 100px 173px;
   grid-template-rows: auto;
   row-gap: 20px;
+}
+
+.alert {
+  color: red;
+  background: #000;
+  padding: 5px 5px;
+}
+.success {
+  color: rgba(0, 0, 0, 0.9);
+  background-color: hsl(125, 67%, 44%);
+  padding: 5px 5px;
 }
 
 @media screen and (min-width: 992px) {

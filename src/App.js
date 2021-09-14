@@ -18,6 +18,10 @@ function App() {
   const [personsBirthToday, setPersonsBirthToday] = useState([]);
   //state for single person
   const [person, setPerson] = useState({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' })
+  //state for alert
+  const [alert, setAlert] = useState({ state: false, type: '' })
+
+
   //get current date
   const today = new Date();
   const todayYear = today.getFullYear();
@@ -36,18 +40,20 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (person.date < 0 || person.date > 31) {
-      //placeholder for error handling
-      console.log('wrong date')
+      //set alert for date error
+      setAlert({ state: true, type: 'date' })
     }
     else if (person.firstName && person.lastName && person.date && person.month && person.year) {
       //if all values is allright set new person to our list
       setpeopleList([...peopleList, person]);
       //reset person
       setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' });
+      //show success alert
+      setAlert({ state: true, type: 'success' })
 
     } else {
-      //placeholder for error handling
-      console.log('error')
+      //set alert for missing fields error
+      setAlert({ state: true, type: 'fields' })
     }
 
   }
@@ -97,6 +103,16 @@ function App() {
     localStorage.setItem('birthdaysList', JSON.stringify(peopleList));
   }, [peopleList])
 
+  //useEffect to remove alert after given time
+  useEffect(() => {
+    const alertId = setTimeout(() => {
+      setAlert({ state: false, type: '' });
+    }, 3000)
+    return () => {
+      clearTimeout(alertId)
+    }
+  }, [alert])
+
 
   //if theres no persons to display return no users
 
@@ -120,7 +136,7 @@ function App() {
 
         </section>
         {/* FORM */}
-        <Form person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
+        <Form alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
       </section>
     </main>
   );

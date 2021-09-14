@@ -1,9 +1,11 @@
 import React from 'react'
+import Alert from './Alert'
 
-const Form = ({ person, handleSubmit, handleChange }) => {
+const Form = ({ person, handleSubmit, handleChange, alert }) => {
     return (
         <form className="form" action="">
             <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>
+            <Alert alert={alert} />
             <div className="form-control">
                 <label htmlFor="firstName">Имя:</label>
                 <input
@@ -72,7 +74,7 @@ const Form = ({ person, handleSubmit, handleChange }) => {
                 />
             </div>
             <div className="form-control">
-                <label htmlFor="image">Фото url:</label>
+                <label htmlFor="image">Фото url: <span>(необязательно)</span></label>
                 <input
                     onChange={handleChange}
                     required id="image"
