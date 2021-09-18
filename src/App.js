@@ -117,7 +117,7 @@ function App() {
   const openModal = () => {
     setIsModalOpen(true);
   }
-  const closeModal = () => {
+  const closeModal = (e) => {
     setIsModalOpen(false);
     //also clear form on close
     setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' });

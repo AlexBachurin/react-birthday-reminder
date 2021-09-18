@@ -7,7 +7,7 @@ const SubmitModal = ({ fileInputRef, alert, person, handleChange, handleSubmit, 
         <div className={clsName}>
             <div className="modal-content">
                 <button onClick={closeModal} className="btn close-btn"><AiOutlineClose className="close-icon" /></button>
-                <Form fileInputRef={fileInputRef} alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
+                <Form closeModal={closeModal} fileInputRef={fileInputRef} alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
             </div>
         </div>
     )

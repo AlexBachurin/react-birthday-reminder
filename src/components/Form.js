@@ -2,7 +2,7 @@ import React from 'react'
 import Alert from './Alert';
 
 
-const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
+const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert, closeModal }) => {
     return (
         <form className="form" action="">
 
@@ -18,7 +18,7 @@ const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
                         <label htmlFor="image">
                             <input
                                 onChange={handleChange}
-                                required
+
                                 id="image"
                                 name="image"
                                 accept="image/*"
@@ -40,7 +40,7 @@ const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
                             </label>
                             <input
                                 onChange={handleChange}
-                                required
+
                                 id="firstName"
                                 name="firstName"
                                 type="text"
@@ -52,7 +52,7 @@ const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
                             <label htmlFor="lastName">Фамилия:</label>
                             <input
                                 onChange={handleChange}
-                                required id="lastName"
+                                id="lastName"
                                 name="lastName"
                                 type="text"
                                 value={person.lastName}
@@ -63,7 +63,7 @@ const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
                         <label htmlFor="date">Дата:</label>
                         <input
                             onChange={handleChange}
-                            required id="date"
+                            id="date"
                             name="date"
                             type="number"
                             min="1"
@@ -98,7 +98,7 @@ const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
                         <label htmlFor="year">Год:</label>
                         <input
                             onChange={handleChange}
-                            required id="year"
+                            id="year"
                             name="year"
                             type="number"
                             min="0"
@@ -107,7 +107,11 @@ const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
                     </div>
                 </div>
             </div>
-            <button onClick={handleSubmit} className="submit-btn" type="submit"> Добавить </button>
+            <div className="form-btns-container">
+                <button onClick={closeModal} className="cancel-btn" type="button">Отмена</button>
+                <button onClick={handleSubmit} className="submit-btn" type="submit"> Добавить </button>
+
+            </div>
         </form>
     )
 }
