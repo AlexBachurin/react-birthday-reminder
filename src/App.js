@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Form from './components/Form';
 import Persons from './components/Persons';
-
+import SubmitModal from './components/SubmitModal';
+import { AiOutlineClose } from 'react-icons/ai'
 //get data from local storage
 const getLocalStorage = () => {
   let list = localStorage.getItem('birthdaysList');
@@ -107,6 +107,7 @@ function App() {
       return Number(person.date) === todayDate && person.month.toLowerCase() === todayMonth.toLowerCase();
     })
     setPersonsBirthToday(peopleWithBirthToday);
+
   }
   //check birthday on every page load
   useEffect(() => {
@@ -152,9 +153,14 @@ function App() {
           {personsBirthToday.length !== 0 ? <Persons personsBirthToday={personsBirthToday} todayYear={todayYear} /> : <h3 className="birthdays-none">There is no birthdays today</h3>}
 
         </section>
+        <div className="underline"></div>
+        <button className="btn close-btn"><AiOutlineClose className="close-icon" /></button>
+        <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>
+        <button className="btn add-btn">Добавить</button>
         {/* FORM */}
-        <Form fileInputRef={fileInputRef} alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
+
       </section>
+      <SubmitModal fileInputRef={fileInputRef} alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
     </main>
   );
 }

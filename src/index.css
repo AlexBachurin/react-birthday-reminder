@@ -104,6 +104,7 @@ p {
   color: var(--clr-grey-1);
 }
 main {
+  position: relative;
   height: 100vh;
 }
 
@@ -159,7 +160,9 @@ input[type="number"] {
 .underline {
   background-color: #222;
   height: 2px;
+  margin-bottom: 10px;
 }
+
 .birthdays-section {
   margin-top: 40px;
   margin-bottom: 50px;
@@ -229,16 +232,79 @@ input[type="number"] {
   object-fit: cover;
   border-radius: 50px;
 }
-
+/* FORM */
 .form {
-  margin-top: 30px;
-  max-width: 350px;
-  margin: 0 auto;
-  display: grid;
+  position: relative;
+  /* margin-top: 30px; */
+  /* max-width: 350px; */
+  /* margin: 0 auto; */
+  /* display: grid;
   row-gap: 20px;
   border: 1px solid #666;
   padding: 20px;
-  background-color: var(--clr-grey-10);
+  padding-top: 40px;
+  background: transparent;
+  border: none; */
+}
+.form input,
+select {
+  background: transparent;
+  border-radius: 10px;
+  border: 2px solid#474866;
+  padding: 5px;
+  outline: none;
+  color: #fff;
+}
+.form select {
+  background: #474866;
+}
+.form-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+.form-image-container {
+  border: 1px solid #474866;
+  max-width: 200px;
+  padding-top: 15px;
+}
+.form-image-container .form-control {
+  display: grid;
+  place-items: center;
+}
+.form-image-container p {
+  color: #5e65c3;
+  cursor: pointer;
+  text-align: center;
+}
+.form-info-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.form-name-container {
+  display: flex;
+  gap: 10px;
+}
+
+.form label {
+  color: #fff;
+}
+.form h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+.form-control-date {
+  display: grid;
+
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 20px;
+}
+.form-control-date input {
+  /* justify-self: start; */
 }
 
 .form-title {
@@ -251,25 +317,19 @@ input[type="number"] {
   display: block;
   margin: 0 auto;
   margin-top: 20px;
-  background-color: #102a42;
+  background-color: #fff;
   box-shadow: 0px 13px 13px 0px rgba(102, 64, 158, 0.28);
   outline: none;
   border-radius: 10px;
   border: none;
   padding: 10px;
-  color: #fff;
+  color: #161724;
   cursor: pointer;
   transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.5s;
 }
 .submit-btn:hover {
   background-color: #8895a1;
-}
-
-.form-control {
-  display: grid;
-  grid-template-columns: 100px 173px;
-  grid-template-rows: auto;
-  row-gap: 20px;
+  color: #fff;
 }
 
 .alert {
@@ -282,15 +342,80 @@ input[type="number"] {
   background-color: hsl(125, 67%, 44%);
   padding: 5px 5px;
 }
+.photo-container {
+  min-height: 100px;
+}
 .photo-preview {
   margin-top: 5px;
   width: 100px;
   height: 100px;
   object-fit: cover;
+  border-radius: 50px;
 }
 /* hide choose file text */
 input[type="file"] {
   color: transparent;
+  background: transparent;
+  display: none;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  z-index: -1;
+}
+.modal-overlay.show {
+  visibility: visible;
+  z-index: 10;
+}
+.modal-content {
+  background-color: #23243b;
+  width: 90vw;
+  /* height: 30vh; */
+  padding: 40px 30px;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  color: #000;
+  outline: none;
+  border: none;
+}
+.close-icon {
+  font-size: 1.3rem;
+}
+
+.add-btn {
+  text-transform: uppercase;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #191919;
+  color: #fff;
+  transition: 0.6s all ease-in-out;
+}
+.add-btn:hover {
+  background-color: #e6e6e6;
+  color: #222;
 }
 
 @media screen and (min-width: 992px) {
@@ -300,10 +425,16 @@ input[type="file"] {
   }
 
   .form-control {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 127px 173px;
     grid-template-rows: auto;
-    row-gap: 20px;
+    row-gap: 20px; */
+  }
+  .modal-content {
+    /* width: 35vw; */
+  }
+  .form-wrapper {
+    justify-content: center;
   }
 
   .birthdays-section {
@@ -312,5 +443,37 @@ input[type="file"] {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
+  }
+}
+
+@media screen and (min-width: 1660px) {
+  .modal-content {
+    width: 35vw;
+  }
+  .form-wrapper {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 618px) {
+  .modal-content {
+    padding: 15px;
+  }
+  .form-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-info-container {
+    grid-row-gap: 15px;
+  }
+  .form-name-container {
+    flex-direction: column;
+  }
+  .form-name-container .form-control {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 20px;
   }
 }
