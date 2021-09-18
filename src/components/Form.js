@@ -1,9 +1,11 @@
 import React from 'react'
-import Alert from './Alert'
+import Alert from './Alert';
+
 
 const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert }) => {
     return (
         <form className="form" action="">
+
             <h3>Заполните информацию</h3>
             <Alert alert={alert} />
             <div className="form-wrapper">

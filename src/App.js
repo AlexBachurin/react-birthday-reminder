@@ -22,6 +22,8 @@ function App() {
   const [person, setPerson] = useState({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' })
   //state for alert
   const [alert, setAlert] = useState({ state: false, type: '' })
+  //state for modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   //get current date
   const today = new Date();
   const todayYear = today.getFullYear();
@@ -109,6 +111,20 @@ function App() {
     setPersonsBirthToday(peopleWithBirthToday);
 
   }
+
+  //MODAL 
+  const openModal = () => {
+    setIsModalOpen(true);
+  }
+  const closeModal = () => {
+    setIsModalOpen(false);
+    //also clear form on close
+    setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' });
+    fileInputRef.current.value = null;
+  }
+
+
+
   //check birthday on every page load
   useEffect(() => {
     checkBirthday();
@@ -154,13 +170,11 @@ function App() {
 
         </section>
         <div className="underline"></div>
-        <button className="btn close-btn"><AiOutlineClose className="close-icon" /></button>
         <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>
-        <button className="btn add-btn">Добавить</button>
-        {/* FORM */}
-
+        <button onClick={openModal} className="btn add-btn">Добавить</button>
       </section>
-      <SubmitModal fileInputRef={fileInputRef} alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
+      {/* FORM */}
+      <SubmitModal isModalOpen={isModalOpen} closeModal={closeModal} fileInputRef={fileInputRef} alert={alert} person={person} handleChange={handleChange} handleSubmit={handleSubmit} />
     </main>
   );
 }

@@ -325,7 +325,7 @@ select {
   padding: 10px;
   color: #161724;
   cursor: pointer;
-  transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.5s;
+  /* transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.5s; */
 }
 .submit-btn:hover {
   background-color: #8895a1;
@@ -377,6 +377,7 @@ input[type="file"] {
   z-index: 10;
 }
 .modal-content {
+  position: relative;
   background-color: #23243b;
   width: 90vw;
   /* height: 30vh; */
@@ -392,9 +393,11 @@ input[type="file"] {
   color: #000;
   outline: none;
   border: none;
+  cursor: pointer;
 }
 .close-icon {
   font-size: 1.3rem;
+  color: #fff;
 }
 
 .add-btn {
