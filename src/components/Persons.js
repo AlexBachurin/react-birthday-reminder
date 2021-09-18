@@ -1,11 +1,13 @@
 import React from 'react'
 import { FaBirthdayCake } from 'react-icons/fa'
+import { useGlobalContext } from '../context'
 
-const Person = ({ personsList, todayYear, todayDate, todayMonth }) => {
+const Persons = ({ peopleList }) => {
+    const { todayYear, todayDate, todayMonth } = useGlobalContext();
     return (
         <div className="birthdays-wrapper">
             {
-                personsList.map((person, index) => {
+                peopleList.map((person, index) => {
                     return (
                         <article key={index} className="birthday">
                             <div className="img-container">
@@ -26,4 +28,4 @@ const Person = ({ personsList, todayYear, todayDate, todayMonth }) => {
 
 }
 
-export default Person
+export default Persons

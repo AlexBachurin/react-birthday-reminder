@@ -1,8 +1,10 @@
 import React from 'react'
+import { useGlobalContext } from '../context';
 import Alert from './Alert';
 
 
-const Form = ({ fileInputRef, person, handleSubmit, handleChange, alert, closeModal }) => {
+const Form = () => {
+    const { fileInputRef, person, handleSubmit, handleChange, alert, closeModal } = useGlobalContext();
     return (
         <form className="form" action="">
 

@@ -1,6 +1,8 @@
 import React from 'react'
+import { useGlobalContext } from '../context';
 
-const Alert = ({ alert }) => {
+const Alert = () => {
+    const { alert } = useGlobalContext();
     //var for storing different paragraphs with error based on error type
     let errorElem = ``;
     if (alert.type === 'date') {

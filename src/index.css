@@ -323,9 +323,6 @@ select {
   grid-template-columns: auto 1fr;
   grid-column-gap: 20px;
 }
-.form-control-date input {
-  /* justify-self: start; */
-}
 
 .form-title {
   text-align: center;
@@ -492,15 +489,6 @@ input[type="file"] {
     padding-bottom: 50px;
   }
 
-  .form-control {
-    /* display: grid;
-    grid-template-columns: 127px 173px;
-    grid-template-rows: auto;
-    row-gap: 20px; */
-  }
-  .modal-content {
-    /* width: 35vw; */
-  }
   .form-wrapper {
     justify-content: center;
   }

@@ -1,7 +1,9 @@
 import React from 'react'
 import Form from './Form'
 import { AiOutlineClose } from 'react-icons/ai'
-const SubmitModal = ({ fileInputRef, alert, person, handleChange, handleSubmit, closeModal, isModalOpen }) => {
+import { useGlobalContext } from '../context'
+const SubmitModal = () => {
+    const { fileInputRef, alert, person, handleChange, handleSubmit, closeModal, isModalOpen } = useGlobalContext();
     let clsName = isModalOpen ? 'modal-overlay show' : 'modal-overlay'
     return (
         <div className={clsName}>
