@@ -12,6 +12,8 @@ const getLocalStorage = () => {
 
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
+    //ref for modal overlay
+    const modalOverlayRef = useRef(null);
     //ref for file input to clear value
     const fileInputRef = useRef(null)
     //set our people list with data from local storage
@@ -117,6 +119,12 @@ const AppProvider = ({ children }) => {
         setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' });
         fileInputRef.current.value = null;
     }
+    const closeModalOnOverlayClick = (e) => {
+        console.log(e.target)
+        if (e.target === modalOverlayRef.current) {
+            setIsModalOpen(false);
+        }
+    }
 
     //SHOW ALL/BIRTHDAYS
     const showAllPeople = () => {
@@ -168,7 +176,9 @@ const AppProvider = ({ children }) => {
         closeModal,
         showAllPeople,
         showBirthdays,
-        fileInputRef
+        fileInputRef,
+        modalOverlayRef,
+        closeModalOnOverlayClick
 
     }}>
         {children}
