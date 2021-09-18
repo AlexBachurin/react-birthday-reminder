@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Persons from './components/Persons';
 import SubmitModal from './components/SubmitModal';
-import { AiOutlineClose } from 'react-icons/ai'
 //get data from local storage
 const getLocalStorage = () => {
   let list = localStorage.getItem('birthdaysList');
@@ -24,6 +23,8 @@ function App() {
   const [alert, setAlert] = useState({ state: false, type: '' })
   //state for modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  //state for show all
+  const [showAll, setShowAll] = useState(false);
   //get current date
   const today = new Date();
   const todayYear = today.getFullYear();
@@ -123,6 +124,14 @@ function App() {
     fileInputRef.current.value = null;
   }
 
+  //SHOW ALL/BIRTHDAYS
+  const showAllPeople = () => {
+    setShowAll(true)
+  }
+
+  const showBirthdays = () => {
+    setShowAll(false);
+  }
 
 
   //check birthday on every page load
@@ -148,8 +157,14 @@ function App() {
   }, [alert])
 
 
-  //if theres no persons to display return no users
+  // classname for section
 
+  let clsNameAll = showAll ? 'all-section show' : 'all-section'
+  let clsNameBirthdays = showAll ? 'birthdays-section' : 'birthdays-section show'
+
+  //claassname for button active 
+  let btnClsNameAll = showAll ? 'btn active' : 'btn';
+  let btnClsNameBirthdays = showAll ? 'btn' : 'btn active';
   return (
     <main>
       <section className="section">
@@ -158,16 +173,27 @@ function App() {
           <h1 className="title">Birthday reminder app</h1>
           <div className="underline"></div>
         </div>
-        <h2 className="birthdays-title">Дни Рождения Сегодня!</h2>
-        <div className="date-container">
-          <span className="date">{todayDate}</span>
-          <span className="month">{transformMonthName(todayMonth)}</span>
-          <span className="year">{todayYear}</span>
+        <div className="toggle-btn-container">
+          <button className={btnClsNameBirthdays} onClick={showBirthdays}>birthdays</button>
+          <button className={btnClsNameAll} onClick={showAllPeople}>all</button>
         </div>
-        <section className="birthdays-section">
-          {/* display people with birthday */}
-          {personsBirthToday.length !== 0 ? <Persons personsBirthToday={personsBirthToday} todayYear={todayYear} /> : <h3 className="birthdays-none">There is no birthdays today</h3>}
 
+        <section className={clsNameBirthdays}>
+          <div className="birthday-section-header">
+            <h2 className="birthdays-title">Дни Рождения Сегодня!</h2>
+            <div className="date-container">
+              <span className="date">{todayDate}</span>
+              <span className="month">{transformMonthName(todayMonth)}</span>
+              <span className="year">{todayYear}</span>
+            </div>
+          </div>
+          {/* display people with birthday */}
+          {personsBirthToday.length !== 0 ? <Persons personsList={personsBirthToday} todayYear={todayYear} /> : <h3 className="birthdays-none">There is no birthdays today</h3>}
+
+        </section>
+        <section className={clsNameAll}>
+          {/* display all */}
+          {peopleList.length === 0 ? <h3 className="birthdays-none">Вы еще не добавили ни одного человека</h3> : <Persons personsList={peopleList} todayYear={todayYear} />}
         </section>
         <div className="underline"></div>
         <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>

@@ -163,13 +163,29 @@ input[type="number"] {
   margin-bottom: 10px;
 }
 
-.birthdays-section {
+.birthdays-wrapper {
   margin-top: 40px;
   margin-bottom: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 20px;
   min-height: 250px;
+}
+.birthdays-section {
+  display: none;
+}
+.birthdays-section.show {
+  display: block;
+}
+.all-section {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  display: none;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+.all-section.show {
+  display: block;
 }
 .birthdays-title {
   margin-top: 30px;
@@ -178,7 +194,8 @@ input[type="number"] {
 .birthdays-none {
   text-align: center;
   color: var(--clr-white);
-  padding-top: 125px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 .date-container {
   margin: 0 auto;
@@ -421,6 +438,35 @@ input[type="file"] {
   color: #222;
 }
 
+.toggle-btn-container {
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.toggle-btn-container button {
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  background: transparent;
+  border-radius: 10px;
+  color: #7332a8;
+  border: 2px solid #000;
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.toggle-btn-container button:hover {
+  color: #fff;
+  background: #7332a8;
+}
+.toggle-btn-container button.active {
+  background: #7332a8;
+  color: #fff;
+}
+
 @media screen and (min-width: 992px) {
   .section {
     width: 95vw;
@@ -440,10 +486,9 @@ input[type="file"] {
     justify-content: center;
   }
 
-  .birthdays-section {
+  .birthdays-wrapper {
     margin-top: 40px;
     margin-bottom: 50px;
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
   }

@@ -1,11 +1,11 @@
 import React from 'react'
 import { FaBirthdayCake } from 'react-icons/fa'
 
-const Person = ({ personsBirthToday, todayYear }) => {
+const Person = ({ personsList, todayYear }) => {
     return (
-        <>
+        <div className="birthdays-wrapper">
             {
-                personsBirthToday.map((person, index) => {
+                personsList.map((person, index) => {
                     return (
                         <article key={index} className="birthday">
                             <div className="img-container">
@@ -19,7 +19,7 @@ const Person = ({ personsBirthToday, todayYear }) => {
                     )
                 })
             }
-        </>
+        </div>
     )
 
 }
