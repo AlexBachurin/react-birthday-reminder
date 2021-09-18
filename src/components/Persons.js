@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaBirthdayCake } from 'react-icons/fa'
 
-const Person = ({ personsList, todayYear }) => {
+const Person = ({ personsList, todayYear, todayDate, todayMonth }) => {
     return (
         <div className="birthdays-wrapper">
             {
@@ -13,8 +13,10 @@ const Person = ({ personsList, todayYear }) => {
                                 <img src={person.img ? person.img : 'https://res.cloudinary.com/dljezd6qv/image/upload/v1631577257/react-birthday-reminder/avatar-placeholder.png'} alt={person.firstName} />
                             </div>
                             <h4>{person.firstName} {person.lastName}</h4>
-                            <p>Сегодня {person.firstName} празднует свое <span>{todayYear - person.year}</span>  летие! </p>
-                            < FaBirthdayCake className="birthday-icon" />
+                            <p className='birthday-date'>{person.date} {person.month} {person.year}</p>
+
+                            {(Number(person.date) === todayDate && person.month.toLowerCase() === todayMonth.toLowerCase()) ? <><p>Сегодня {person.firstName} празднует свое <span>{todayYear - person.year}</span>  летие! </p><FaBirthdayCake className="birthday-icon" /></> : null}
+
                         </article>
                     )
                 })

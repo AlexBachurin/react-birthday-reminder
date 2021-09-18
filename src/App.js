@@ -174,8 +174,8 @@ function App() {
           <div className="underline"></div>
         </div>
         <div className="toggle-btn-container">
-          <button className={btnClsNameBirthdays} onClick={showBirthdays}>birthdays</button>
-          <button className={btnClsNameAll} onClick={showAllPeople}>all</button>
+          <button className={btnClsNameBirthdays} onClick={showBirthdays}>Сегодня</button>
+          <button className={btnClsNameAll} onClick={showAllPeople}>Все</button>
         </div>
 
         <section className={clsNameBirthdays}>
@@ -188,12 +188,12 @@ function App() {
             </div>
           </div>
           {/* display people with birthday */}
-          {personsBirthToday.length !== 0 ? <Persons personsList={personsBirthToday} todayYear={todayYear} /> : <h3 className="birthdays-none">There is no birthdays today</h3>}
+          {personsBirthToday.length !== 0 ? <Persons personsList={personsBirthToday} todayYear={todayYear} todayDate={todayDate} todayMonth={todayMonth} /> : <h3 className="birthdays-none">Сегодня Дни Рождения отсутствуют</h3>}
 
         </section>
         <section className={clsNameAll}>
           {/* display all */}
-          {peopleList.length === 0 ? <h3 className="birthdays-none">Вы еще не добавили ни одного человека</h3> : <Persons personsList={peopleList} todayYear={todayYear} />}
+          {peopleList.length === 0 ? <h3 className="birthdays-none">Вы еще не добавили ни одного человека</h3> : <Persons todayDate={todayDate} todayMonth={todayMonth} personsList={peopleList} todayYear={todayYear} />}
         </section>
         <div className="underline"></div>
         <h4 className="form-title">Добавьте человека чтобы получить напоминание о его дне рождения!</h4>
