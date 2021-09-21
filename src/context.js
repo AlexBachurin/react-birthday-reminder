@@ -144,9 +144,9 @@ const AppProvider = ({ children }) => {
 
 
     //check birthday on every page load
-    useEffect(() => {
-        checkBirthday();
-    }, [checkBirthday])
+    // useEffect(() => {
+    //     checkBirthday();
+    // }, [checkBirthday])
 
     //change local storage value everytime we change our people list
     useEffect(() => {
