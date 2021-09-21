@@ -21,7 +21,7 @@ const AppProvider = ({ children }) => {
     //state for people who have birthday today
     const [personsBirthToday, setPersonsBirthToday] = useState([]);
     //state for single person
-    const [person, setPerson] = useState({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' })
+    const [person, setPerson] = useState({ id: '', firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' })
     //state for alert
     const [alert, setAlert] = useState({ state: false, type: '' })
     //state for modal
@@ -43,10 +43,12 @@ const AppProvider = ({ children }) => {
             setAlert({ state: true, type: 'date' })
         }
         else if (person.firstName && person.lastName && person.date && person.month && person.year) {
+            //add id before adding to list
+            const newPerson = { ...person, id: new Date().getTime().toString() + Math.random() }
             //if all values is allright set new person to our list
-            setpeopleList([...peopleList, person]);
+            setpeopleList([...peopleList, newPerson]);
             //reset person
-            setPerson({ firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' });
+            setPerson({ id: '', firstName: '', lastName: '', date: '', month: 'Январь', year: '', img: '' });
             //show success alert
             setAlert({ state: true, type: 'success' })
             //clear value of file input
@@ -120,7 +122,6 @@ const AppProvider = ({ children }) => {
         fileInputRef.current.value = null;
     }
     const closeModalOnOverlayClick = (e) => {
-        console.log(e.target)
         if (e.target === modalOverlayRef.current) {
             setIsModalOpen(false);
         }
@@ -133,6 +134,12 @@ const AppProvider = ({ children }) => {
 
     const showBirthdays = () => {
         setShowAll(false);
+    }
+
+    //REMOVE PERSON
+    const removePerson = (id) => {
+        const newList = peopleList.filter(item => item.id !== id);
+        setpeopleList(newList);
     }
 
 
@@ -178,7 +185,8 @@ const AppProvider = ({ children }) => {
         showBirthdays,
         fileInputRef,
         modalOverlayRef,
-        closeModalOnOverlayClick
+        closeModalOnOverlayClick,
+        removePerson
 
     }}>
         {children}

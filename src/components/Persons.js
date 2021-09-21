@@ -3,7 +3,7 @@ import { FaBirthdayCake } from 'react-icons/fa'
 import { useGlobalContext } from '../context'
 
 const Persons = ({ peopleList }) => {
-    const { todayYear, todayDate, todayMonth } = useGlobalContext();
+    const { removePerson, todayYear, todayDate, todayMonth } = useGlobalContext();
     return (
         <div className="birthdays-wrapper">
             {
@@ -18,7 +18,7 @@ const Persons = ({ peopleList }) => {
                             <p className='birthday-date'>{person.date} {person.month} {person.year}</p>
 
                             {(Number(person.date) === todayDate && person.month.toLowerCase() === todayMonth.toLowerCase()) ? <><p>Сегодня {person.firstName} празднует свое <span>{todayYear - person.year}</span>  летие! </p><FaBirthdayCake className="birthday-icon" /></> : null}
-
+                            <button onClick={() => removePerson(person.id)} className="remove-btn">remove</button>
                         </article>
                     )
                 })
