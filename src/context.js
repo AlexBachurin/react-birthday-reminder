@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, useEffect } from 'react'
+import React, { useContext, useRef, useState, useEffect, useCallback } from 'react'
 
 //get data from local storage
 const getLocalStorage = () => {
@@ -102,14 +102,14 @@ const AppProvider = ({ children }) => {
     }
 
     //functionality to check if person in our list birthday is today
-    const checkBirthday = () => {
+    const checkBirthday = useCallback(() => {
         const peopleWithBirthToday = peopleList.filter((person) => {
             //dont forget about types and cases
             return Number(person.date) === todayDate && person.month.toLowerCase() === todayMonth.toLowerCase();
         })
         setPersonsBirthToday(peopleWithBirthToday);
 
-    }
+    }, [peopleList, todayDate, todayMonth])
 
     //MODAL 
     const openModal = () => {
@@ -146,14 +146,14 @@ const AppProvider = ({ children }) => {
     //check birthday on every page load
     useEffect(() => {
         checkBirthday();
-    }, [])
+    }, [checkBirthday])
 
     //change local storage value everytime we change our people list
     useEffect(() => {
         //also check people with birthdays on every add to our list
         checkBirthday();
         localStorage.setItem('birthdaysList', JSON.stringify(peopleList));
-    }, [peopleList])
+    }, [peopleList, checkBirthday])
 
     //useEffect to remove alert after given time
     useEffect(() => {
