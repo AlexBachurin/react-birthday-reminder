@@ -34,7 +34,6 @@ const AppProvider = ({ children }) => {
     const todayDate = today.getDate();
     //get full month name with this method
     const todayMonth = today.toLocaleString('default', { month: 'long' });
-    console.log(todayMonth)
     //handle person when we add him to the list
     const handleSubmit = (e) => {
         e.preventDefault();
